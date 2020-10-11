@@ -20,6 +20,7 @@ Ability to view the posts of a particular user, the ability to comment on them, 
 After logging in to the application show stream - a list of posts in the system, sorted by creation date in descending order (last from above).
 
 Non-functional requirements:
+
 The minimum number of users is 10.
 
 The minimum number of posts is 20.
