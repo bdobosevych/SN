@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        {% load static %}
+
+        <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+        <meta charset="UTF-8">
+        <title>Login</title>
+    </head>
+<body>
+<div class="login-page">
+    <div class="form">
+        <form class="login-form" action="" method="post">
+            {% csrf_token %}
+            <a style="color:rgba(245, 0, 0, 0.7)">{% if error %} {{ error }} {% endif %}</a><br><br>
+            <input type="text" placeholder="username" name="username" value="{{ username }}" required/>
+            <input type="password" placeholder="password" name="password" required/>
+            <button type="submit">login</button>
+            <p class="message">Not registered? <a href="/users/register">Create an account</a></p>
+        </form>
+    </div>
+</div>
+</body>
+</html>

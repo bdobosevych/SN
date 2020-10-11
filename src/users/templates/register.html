@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
+    <script src="{% static 'script.js' %}" type="text/javascript"></script>
+    <title>Register</title>
+</head>
+<body>
+<div class="login-page">
+    <form class="form" action="/users/register/" method="post">
+        {% csrf_token %}
+        <a style="color:rgba(245, 0, 0, 0.7)" id="error-message"></a><br><br>
+        <input type="text" placeholder="name" name="username" onchange="check_name(this.value)" required/><br>
+        <input type="password" placeholder="password" name="password" required/><br>
+        <input type="email" placeholder="email address" name="email" onchange="check_email(this.value)" required/><br>
+        <button type="submit">register</button>
+        <p class="message">Already registered? <a href="/users/login">Sign In</a></p>
+    </form>
+</div>
+</body>
+</html>

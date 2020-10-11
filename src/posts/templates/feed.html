@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
+    <meta charset="UTF-8">
+    <title>Quizzes</title>
+</head>
+<body>
+<div class="hat">
+    <button onclick="window.location='/homepage/';">Home</button>
+    <a style="width:70px"></a>
+    <button onclick="window.location='/profiles/{{ username }}';">Profile</button>
+    <button onclick="window.location='/users/logout';">Log out</button>
+</div>
+<div>
+    <h1>Feed</h1>
+    {% for post in posts %}
+    <h3>{{ post.title }}</h3>
+    <h4>{{ post.content }}</h4>
+    <h4>{{ post.author }}</h4>
+        {% for comment in post.comments %}
+        <h4>{{ comment.comment }}</h4>
+        <h5>{{ comment.author }}</h5>
+        {% endfor %}
+    {% endfor %}
+</div>
+</body>
