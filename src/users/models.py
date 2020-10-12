@@ -18,6 +18,9 @@ def create_user(username, password, email):
     """
 
     try:
+        found = USERS.find_one({"username": username})
+        if found:
+            return None
         user = User.objects.create_user(username=username, email=email, password=password)
         user.save()
         USERS.find_one_and_update(

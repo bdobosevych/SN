@@ -1,9 +1,6 @@
 """
 profiles service
 """
-import datetime
-
-from pymongo.errors import DuplicateKeyError
 
 from social.settings import DB
 
@@ -20,7 +17,6 @@ class ProfileService:
     def get_profile(username):
         """
         get profile by username
-
         :param username: string
         :return: profile instance if found, else None
         """
@@ -30,7 +26,6 @@ class ProfileService:
     @staticmethod
     def follow_user(follower_name, user_name):
         """
-
         :param follower_name:
         :param user_name:
         :return: True if Updated, else False
@@ -52,6 +47,34 @@ class ProfileService:
             USERS.find_one_and_update(
                 {"username": follower_name},
                 {"$push": {"follows": user_name}},
+                upsert=True)
+            return True
+        return False
+
+    @staticmethod
+    def unfollow_user(follower_name, user_name):
+        """
+        :param follower_name:
+        :param user_name:
+        :return: True if Updated, else False
+        """
+        if follower_name == user_name:
+            return False
+
+        user = ProfileService.get_profile(user_name)
+        follower = ProfileService.get_profile(follower_name)
+        if follower_name not in user['followers']:
+            return True
+
+        if user and follower:
+            USERS.find_one_and_update(
+                {"username": user_name},
+                {"$pull": {"followers": follower_name}},
+                upsert=True)
+
+            USERS.find_one_and_update(
+                {"username": follower_name},
+                {"$pull": {"follows": user_name}},
                 upsert=True)
             return True
         return False
