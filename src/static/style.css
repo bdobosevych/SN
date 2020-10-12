@@ -1,0 +1,205 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #F2F2F2;
+  max-width: 560px;
+  margin:0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.hat {
+  position: relative;
+  display:flex;
+  justify-content:end;
+  background: #F2F2F2;
+  max-width: 650px;
+  height:40px;
+  margin:0 auto 100px;
+  margin-bottom:0px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+.form input, textarea {
+  font-family: "Roboto", sans-serif;
+  resize: none;
+  outline: 0;
+  background: #ffffff;
+  border: 0;
+  margin: 0 0 15px;
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+}
+
+.form select {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #ffffff;
+  border: 0;
+  margin: 15px 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+[type=radio] {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #ffffff;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  font-size: 14px;
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+  outline: 2px solid #76b852;
+}
+
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+
+body {
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  background: -moz-linear-gradient(right, #76b852, #8DC26F);
+  background: -o-linear-gradient(right, #76b852, #8DC26F);
+  background: linear-gradient(to left, #76b852, #8DC26F);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h3 {
+  margin: 5px;
+}
+
+
+
+.hat button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.hat button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+
+.post-card {
+  position: relative;
+  max-width: 560px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #FFFFFF;
+}
+
+.post-card__data {
+  padding: 10px;
+}
+
+.post-card__actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-top: -50px;
+}
+
+.post-card__buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.post-card__buttons p:hover {
+  cursor: pointer;
+}
+
+.post-card__comments {
+  display: none;
+}
+
+.comment {
+  display: flex;
+  flex-direction: row;
+  max-width: 560px;
+  margin: 10px;
+  background: #f2f2f2;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.comment h5 {
+  margin-block-start: 0.8em;
+  margin-block-end: 0.8em;
+}
+
+.comment_leave{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 5px;
+}
+
+.comment_leave input{
+  max-width: 85%;
+}
+
+.comment_leave button{
+  width: 12%;
+  margin-bottom: 15px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
