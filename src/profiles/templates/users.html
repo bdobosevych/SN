@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <script src="{% static 'script.js' %}" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+            type="text/javascript"></script>
+    <title>Users</title>
+</head>
+<body>
+<div class="hat">
+    <button onclick="window.location='/feed/';">Home</button>
+    <button onclick="window.location='/profiles/';">Users</button>
+    <button onclick="window.location='/profiles/{{ current }}/';">Profile</button>
+    <a style="width:70px"></a>
+    <button onclick="window.location='/users/logout';">Log out</button>
+</div>
+<div class="form">
+    {% csrf_token %}
+    {% for user in users %}
+    <div class="post-card">
+        <div class="post-card__data">
+            <h3> <a href="/profiles/{{ user.username }}/"> {{ user.username }} </a></h3>
+            <h4>followers: {{ user.followers|length }}</h4>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>
