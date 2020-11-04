@@ -11,9 +11,10 @@
 </head>
 <body>
 <div class="hat">
+    <p> Logged as: {{ current_user }}</p>
     <button onclick="window.location='/feed/';">Home</button>
     <button onclick="window.location='/profiles/';">Users</button>
-    <button onclick="window.location='/profiles/{{ user.username }}/';">Profile</button>
+    <button onclick="window.location='/profiles/{{ current_user }}/';">Profile</button>
     <a style="width:70px"></a>
     <button onclick="window.location='/users/logout';">Log out</button>
 </div>
@@ -33,6 +34,9 @@
                 {% else %}
                 <button type="submit">Unfollow</button>
                 {% endif %}
+                <h4>Distance: {% for name in distance %} {{ name }};<br/> {% endfor %}
+                    {% if distance|length == 0 %} infinity {%endif%}
+                </h4>
             {% endif %}
         </div>
     </form>

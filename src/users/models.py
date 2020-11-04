@@ -2,8 +2,10 @@
 from django.core.exceptions import ObjectDoesNotExist
 from djongo.sql2mongo import SQLDecodeError
 from django.contrib.auth.models import User
+from neobolt.exceptions import DatabaseError
+from py2neo import Node
 
-from social.settings import DB
+from social.settings import DB, NEO4J
 
 
 USERS = DB["auth_user"]
@@ -61,3 +63,17 @@ def change_password(username, new_password):
         return user
     except SQLDecodeError:
         return None
+
+def create_neo_user(username):
+    """
+    add user to neo4j
+    :param username:
+    :return:
+    """
+    found = NEO4J.run("MATCH (u:User {username:$username}) "
+                      "RETURN u", username=username)
+    if found.forward():
+        return None
+    user = NEO4J.run("CREATE (u:User {username:$username}) "
+                     "RETURN u", {'username': username}).current
+    return user

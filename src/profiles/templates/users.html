@@ -11,6 +11,7 @@
 </head>
 <body>
 <div class="hat">
+    <p> Logged as: {{ current }}</p>
     <button onclick="window.location='/feed/';">Home</button>
     <button onclick="window.location='/profiles/';">Users</button>
     <button onclick="window.location='/profiles/{{ current }}/';">Profile</button>

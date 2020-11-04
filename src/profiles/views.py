@@ -38,3 +38,18 @@ def view_profile(request, username):
             "is_following": is_following
         }
     )
+@login_required
+def view_users(request):
+    """
+    :param request:
+    :return:
+    """
+    users = ProfileService.get_all_profiles()
+    return render(
+        request,
+        'users.html',
+        {
+            "users": users,
+            "current": request.user.username
+        }
+    )
