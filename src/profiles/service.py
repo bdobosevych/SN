@@ -2,7 +2,7 @@
 profiles service
 """
 
-from social.settings import DB
+from social.settings import DB, NEO4J
 
 
 USERS = DB["auth_user"]
@@ -48,6 +48,11 @@ class ProfileService:
                 {"username": follower_name},
                 {"$push": {"follows": user_name}},
                 upsert=True)
+
+            # add neo4j relation
+            NEO4J.run("MATCH (a {username:$follower}), (b {username:$user}) "
+                      "CREATE (a)-[:follows]->(b)",
+                      {'follower': follower_name, 'user': user_name})
             return True
         return False
 
@@ -76,5 +81,40 @@ class ProfileService:
                 {"username": follower_name},
                 {"$pull": {"follows": user_name}},
                 upsert=True)
+
+            # delete neo4j relation
+            NEO4J.run("MATCH (a {username:$follower})-[f:follows]->(b {username:$user}) DELETE f",
+                      {'follower': follower_name, 'user': user_name})
             return True
         return False
+
+    @staticmethod
+    def get_all_profiles():
+        """
+        :return:
+        """
+        result = list(USERS.find({}))
+        return result
+
+    @staticmethod
+    def get_distance(user_from, user_to):
+        """
+        get distance from one user to another
+        :param user_from:
+        :param user_to:
+        :return: list of usernames from shortest path or empty list if:
+         there is no path or > 10 nodes in path or both parameters are the same
+        """
+
+        distance = []
+
+        if user_from != user_to:
+            result = NEO4J.run("MATCH p = shortestPath((f:User)-[*..10]-(t:User)) "
+                               "WHERE f.username=$user_from AND t.username=$user_to RETURN p",
+                               {'user_from': user_from, 'user_to': user_to})
+
+            if result.forward():
+                for node in result.current[0].nodes:
+                    distance.append(node['username'])
+                distance.remove(user_from)
+        return distance
