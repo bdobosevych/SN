@@ -10,6 +10,9 @@ from social.settings import DB
 
 
 POSTS = DB["posts_post"]
+from cassandra.io.libevreactor import LibevConnection
+from cassandra.cluster import Cluster
+
 
 
 class PostService:
@@ -26,6 +29,8 @@ class PostService:
         :param content:
         :return:
         """
+        cluster = Cluster()
+        session = cluster.connect('Post')
         post = {
             "author": author,
             "title": title,
@@ -36,7 +41,9 @@ class PostService:
         post_found = POSTS.find_one({"author": author, "title": title})
         if post_found is not None:
             return post_found
+        session.execute("INSERT INTO Post (author, title,content,date,comments) VALUES ", post)
         post = POSTS.insert_one(post)
+
         return post
 
     @staticmethod
@@ -61,4 +68,6 @@ class PostService:
     @staticmethod
     def get_all_posts():
         result = POSTS.find()
-        return result
+        cluster = Cluster()
+        session = cluster.connect('Post')
+        return session.execute("Select * From Post")

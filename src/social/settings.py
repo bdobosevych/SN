@@ -85,7 +85,20 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'social2',
         'ENFORCE_SCHEMA': False
+    },
+    'default': {
+        'ENGINE': 'django_cassandra_engine',
+        'NAME': 'db',
+        'TEST_NAME': 'test_db',
+        'HOST': '127.0.0.1',
+        'OPTIONS': {
+            'replication': {
+                'strategy_class': 'SimpleStrategy',
+                'replication_factor': 3
+                }
+        }
     }
+
 }
 
 CLIENT = pymongo.MongoClient("mongodb://localhost:27017/")
